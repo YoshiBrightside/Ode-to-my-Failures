@@ -1,4 +1,4 @@
-# Codeforces Prolemset
+# Codeforces Problemset
 
 Problems I had done (or tried to) during Codeforces Rounds.
 
