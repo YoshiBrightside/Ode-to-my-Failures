@@ -1,3 +1,6 @@
+# 1186C
+# Vus the Cossack and Numbers
+
 queries = int(input())
 numbers = [0]*queries
 for x in range(queries):
@@ -8,4 +11,4 @@ print(ordNum)
 while(i!=j):
     if(abs(total+ordNum[i])>abs(total+ordNum[j])):
         ordNum[i],ordNum[j]=int(ordNum[i]),int(ordNum[j])+1
-    elif()
+    #elif()

@@ -1,5 +1,8 @@
-a = str(raw_input())
-b = str(raw_input())
+# 1186C
+# Vus the Cossack and Strings
+
+a = str(input())
+b = str(input())
 count = 0
 for x in range(len(a)-len(b)+1):
     compareA = a[x:len(b)+x]
