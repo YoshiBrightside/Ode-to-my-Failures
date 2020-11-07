@@ -1,37 +1,31 @@
-import math
+import sys
+import collections
 
-def get_min_moves(i, j, cur_moves):
-    print('visiting', i, j)
-    if i == n-1 and j == m-1:
-        return cur_moves
-    if memo.get((i, j)):
-        memo[(i,j)] = min(memo[(i,j)], cur_moves)
-        return memo[(i,j)]
-    memo[(i, j)] = math.inf
-    possibilities = [math.inf]
-    if i + jumps[(i, j)] < n:
-        possibilities.append(get_min_moves(i + jumps[(i, j)], j, cur_moves))
-    if i - jumps[(i, j)] >= 0:
-        possibilities.append(get_min_moves(i - jumps[(i, j)], j, cur_moves))
-    if j + jumps[(i, j)] < m:
-        possibilities.append(get_min_moves(i, j + jumps[(i, j)], cur_moves))
-    if j - jumps[(i, j)] >= 0:
-        possibilities.append(get_min_moves(i, j - jumps[(i, j)], cur_moves))
-    memo[(i, j)] = min(possibilities)+1
-    print('ans for', i, j, 'is', memo[(i, j)])
-    return memo[(i,j)]
-
-
-n, m = list(map(int, input().split()))
-memo, jumps = {}, {}
+f_in, ans, jumps, seen = input, 0, {}, {}
+queue = collections.deque([(0,0), (-1, -1)]) #-1, -1 is flag for other level
+f_int, pl, ap, ge = int, queue.popleft, queue.append, seen.get
+n, m = list(map(f_int, f_in().split()))
 for i in range(n):
-    aux = input()
+    aux = f_in()
     for j in range(len(aux)):
-        jumps[(i, j)] = int(aux[j])
-ans = get_min_moves(0, 0, 0)
-if ans == math.inf:
-    ans = -1
-print(ans)
+        jumps[(i, j)] = f_int(aux[j])
+while queue:
+    i, j = pl()
+    if i == -1 and j == -1:
+        ans += 1
+        if queue:
+            ap((-1, -1))
+            continue
+        print(-1)
+        quit()
+    if i == n-1 and j == m-1:
+        print(ans)
+        quit()
+    seen[(i, j)] = 1
+    jump = jumps[(i, j)]
+    for x, y in [(i - jump, j), (i + jump, j), (i, j - jump), (i, j + jump)]:
+        if 0 <= x and x < n and 0 <= y and y < m and not ge((x, y)):
+            ap((x, y))
 
 '''
 4 3
@@ -45,4 +39,14 @@ print(ans)
 19299
 19991
 11110
+6
+
+5 4
+1141
+1999
+1999
+1999
+1110
+4
+
 '''
